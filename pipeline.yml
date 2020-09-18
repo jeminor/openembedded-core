@@ -1,0 +1,36 @@
+trigger:
+- dev/jminor/azdobuild
+
+resources:
+  containers:
+  - container: rtos-build
+    image: rnd-builds.repos.natinst.com/rtos/nilrt-build:0.3
+    options:
+  repositories:
+  - repository: nilrtrepo
+    type: github
+    name: ni/nilrt
+    ref: nilrt/master/dunfell
+
+jobs:
+- job: Build_OpenEmbedded
+  container: rtos-build
+  pool:
+    name: Drivers-NIBuildFarm-RFMIBUILD
+    demands:
+      - docker
+      - Agent.OS -equals Linux
+  steps:
+  - checkout: nilrtrepo
+    submodules: true
+  - checkout: self
+    path: sources/openembedded-core
+  - script: |
+      export MACHINE=x64
+      echo "We are at:"
+      pwd
+      source ni-oe-init-build-env
+      bitbake packagegroup-ni-coreimagerepo
+      bitbake --continue packagegroup-ni-extra
+      bitbake package-index
+      bitbake restore-mode-image
