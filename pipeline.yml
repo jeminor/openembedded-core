@@ -6,11 +6,6 @@ resources:
   - container: rtos-build
     image: rnd-builds.repos.natinst.com/rtos/nilrt-build:0.3
     options:
-  repositories:
-  - repository: nilrtrepo
-    type: github
-    name: ni/nilrt
-    ref: nilrt/master/dunfell
 
 jobs:
 - job: Build_OpenEmbedded
@@ -21,7 +16,7 @@ jobs:
       - docker
       - Agent.OS -equals Linux
   steps:
-  - checkout: nilrtrepo
+  - checkout: https://github.com/ni/nilrt@nilrt/master/dunfell
     submodules: true
   - checkout: self
     path: sources/openembedded-core
