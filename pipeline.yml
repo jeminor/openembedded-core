@@ -30,6 +30,8 @@ jobs:
       export MACHINE=x64
       echo "We are at:"
       pwd
+      echo "here is what's here"
+      ls -al
       source ni-oe-init-build-env
       bitbake packagegroup-ni-coreimagerepo
       bitbake --continue packagegroup-ni-extra
