@@ -45,6 +45,7 @@ jobs:
       ls -al
       cd openembedded-core
       echo "Checking out $(Build.SourceBranch)"
+      git fetch
       git checkout $(Build.SourceBranch)
       cd ../..
       export MACHINE=x64
