@@ -36,18 +36,14 @@ jobs:
   #  path: $(Agent.TempDirectory)/nilrt/sources/openembedded-core
 
   - script: |
+      echo "Copying from $(Build.SourcesDirectory) to $(Agent.TempDirectory)/nilrt/sources"
+      cp -r $(Build.SourcesDirectory) $(Agent.TempDirectory)/nilrt/sources
       cd $(Agent.TempDirectory)/nilrt/sources
-      echo "Cloning out this repo: $(Build.Repository.Uri)"
-      git clone $(Build.Repository.Uri)
-      echo "We are at:"
-      pwd
-      echo "here is what's here"
       ls -al
-      cd openembedded-core
-      echo "Checking out $(Build.SourceBranch)"
-      git fetch
-      git checkout $(Build.SourceBranch)
-      cd ../..
+    name: Copy_over_repo
+
+  - script: |
+      cd $(Agent.TempDirectory)/nilrt
       export MACHINE=x64
       echo "We are at:"
       pwd
