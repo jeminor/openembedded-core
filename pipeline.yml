@@ -23,8 +23,8 @@ jobs:
       ls -al
       #echo "Changing to sourcedir: $(Build.Repository.LocalPath)"
       #cd $(Build.Repository.LocalPath)
-      cd ../../nilrt
-      git clean
+      cd ../../../nilrt
+      git clean -f
       echo "We are at:"
       pwd
       echo "here is what's here"
