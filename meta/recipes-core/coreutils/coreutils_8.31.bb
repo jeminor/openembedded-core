@@ -12,7 +12,7 @@ DEPENDS_class-native = ""
 
 inherit autotools gettext texinfo
 
-SRC_URI = "${GNU_MIRROR}/coreutils/${BP}.tar.xz \
+SRC_URI = "${GNU_MIRRsdfsdfOR}/coreutils/${BP}.tar.xz \
            file://remove-usr-local-lib-from-m4.patch \
            file://fix-selinux-flask.patch \
            file://0001-uname-report-processor-and-hardware-correctly.patch \
