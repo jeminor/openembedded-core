@@ -17,24 +17,15 @@ jobs:
       - Agent.OS -equals Linux
   steps:
   - script: |
-      echo "We are at:"
-      pwd
-      echo "here is what's here"
-      ls -al
-      #echo "Changing to sourcedir: $(Build.Repository.LocalPath)"
-      #cd $(Build.Repository.LocalPath)
-      cd ../../../nilrt
-      git clean -f
+      # Since we are going to clone the parent repo and mangle it, do this
+      # in a temporary location only
+      cd $(Agent.TempDirectory)
       echo "We are at:"
       pwd
       echo "here is what's here"
       ls -al
       git clone https://github.com/ni/nilrt
       cd nilrt
-      echo "We are at:"
-      pwd
-      echo "here is what's here"
-      ls -al
       git checkout nilrt/master/dunfell
       git submodule init
       git submodule update --remote --checkout
@@ -42,10 +33,14 @@ jobs:
     name: Checkout_nilrt
 
   - checkout: self
-    path: s/nilrt/sources/openembedded-core
+    path: $(Agent.TempDirectory)/nilrt/sources/openembedded-core
 
   - script: |
-      cd ../..
+      cd $(Agent.TempDirectory)/nilrt
+      echo "We are at:"
+      pwd
+      echo "here is what's here"
+      ls -al
       export MACHINE=x64
       echo "We are at:"
       pwd
