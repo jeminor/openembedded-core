@@ -21,6 +21,12 @@ jobs:
       pwd
       echo "here is what's here"
       ls -al
+      echo "Changing to sourcedir"
+      cd ${{ Build.Repository.LocalPath}}
+      echo "We are at:"
+      pwd
+      echo "here is what's here"
+      ls -al
       git clone https://github.com/ni/nilrt
       cd nilrt
       echo "We are at:"
