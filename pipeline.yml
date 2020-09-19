@@ -18,6 +18,8 @@ jobs:
   steps:
   - script: |
       echo "This repo is: $(Build.Repository.Name)"
+      export $REPO_NAME=`echo $(Build.Repository.Name) | sed -E "s/.*\///"`
+      echo "Using this as repo name $(REPO_NAME)"
       exit 1
       name: Determine_name
   - script: |
