@@ -30,14 +30,14 @@ jobs:
       git submodule init
       git submodule update --remote --checkout
       rm -r sources/openembedded-core
-    name: Checkout_other_repos
+    name: Checkout_full_nilrt
 
   #- checkout: self
   #  path: $(Agent.TempDirectory)/nilrt/sources/openembedded-core
 
   - script: |
-      echo "Copying from $(Build.SourcesDirectory) to $(Agent.TempDirectory)/nilrt/sources"
-      cp -r $(Build.SourcesDirectory) $(Agent.TempDirectory)/nilrt/sources
+      echo "Copying from $(Build.SourcesDirectory)/openembedded-core to $(Agent.TempDirectory)/nilrt/sources"
+      cp -r $(Build.SourcesDirectory)/openembedded-core $(Agent.TempDirectory)/nilrt/sources
       cd $(Agent.TempDirectory)/nilrt/sources
       ls -al
     name: Copy_over_repo
