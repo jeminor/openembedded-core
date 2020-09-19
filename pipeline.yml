@@ -24,8 +24,9 @@ jobs:
       git submodule update --remote --checkout
       rm -r sources/openembedded-core
   - checkout: self
-    path: sources/openembedded-core
+    path: s/nilrt/sources/openembedded-core
   - script: |
+      cd ../..
       export MACHINE=x64
       echo "We are at:"
       pwd
