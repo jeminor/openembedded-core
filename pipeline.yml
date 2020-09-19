@@ -36,9 +36,13 @@ jobs:
   #  path: $(Agent.TempDirectory)/nilrt/sources/openembedded-core
 
   - script: |
-      echo "Copying from $(Build.SourcesDirectory)/openembedded-core to $(Agent.TempDirectory)/nilrt/sources"
-      cp -r $(Build.SourcesDirectory)/openembedded-core $(Agent.TempDirectory)/nilrt/sources
+      echo "What's in $(Build.SourcesDirectory):"
+      ls -al $(Build.SourcesDirectory)
+      echo "Copying from $(Build.SourcesDirectory) to $(Agent.TempDirectory)/nilrt/sources"
+      cp -r $(Build.SourcesDirectory) $(Agent.TempDirectory)/nilrt/sources/openembedded-core
       cd $(Agent.TempDirectory)/nilrt/sources
+      ls -al
+      cd openembedded-core
       ls -al
     name: Copy_over_repo
 
