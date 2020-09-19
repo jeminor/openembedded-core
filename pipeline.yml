@@ -21,8 +21,8 @@ jobs:
       pwd
       echo "here is what's here"
       ls -al
-      echo "Changing to sourcedir"
-      cd ${{ Build.Repository.LocalPath}}
+      echo "Changing to sourcedir: $(Build.Repository.LocalPath)"
+      cd $(Build.Repository.LocalPath)
       echo "We are at:"
       pwd
       echo "here is what's here"
