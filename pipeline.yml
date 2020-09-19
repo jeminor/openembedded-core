@@ -17,6 +17,10 @@ jobs:
       - Agent.OS -equals Linux
   steps:
   - script: |
+      echo "This repo is: $(Build.Repository.Name)"
+      exit 1
+      name: Determine_name
+  - script: |
       # Since we are going to clone the parent repo and mangle it, do this
       # in a temporary location only
       cd $(Agent.TempDirectory)
