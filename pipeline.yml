@@ -17,6 +17,10 @@ jobs:
       - Agent.OS -equals Linux
   steps:
   - script: |
+      echo "We are at:"
+      pwd
+      echo "here is what's here"
+      ls -al
       git clone https://github.com/ni/nilrt
       cd nilrt
       echo "We are at:"
@@ -27,8 +31,11 @@ jobs:
       git submodule init
       git submodule update --remote --checkout
       rm -r sources/openembedded-core
+    name: Checkout nilrt
+
   - checkout: self
     path: s/nilrt/sources/openembedded-core
+
   - script: |
       cd ../..
       export MACHINE=x64
@@ -41,3 +48,4 @@ jobs:
       bitbake --continue packagegroup-ni-extra
       bitbake package-index
       bitbake restore-mode-image
+    name: Build
