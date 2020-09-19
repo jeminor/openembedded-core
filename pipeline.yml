@@ -19,10 +19,7 @@ jobs:
   - script: |
       echo "This repo is: $(Build.Repository.Name)"
       export REPO_NAME=`echo $(Build.Repository.Name) | sed -E "s/.*\///"`
-      echo "Using this as repo name $(REPO_NAME)"
-      exit 1
-      name: Determine_name
-  - script: |
+      echo "Using this as repo name $REPO_NAME"
       # Since we are going to clone the parent repo and mangle it, do this
       # in a temporary location only
       cd $(Agent.TempDirectory)
@@ -35,22 +32,13 @@ jobs:
       git checkout nilrt/master/dunfell
       git submodule init
       git submodule update --remote --checkout
-      rm -r sources/openembedded-core
-    name: Checkout_full_nilrt
-
-  #- checkout: self
-  #  path: $(Agent.TempDirectory)/nilrt/sources/openembedded-core
-
-  - script: |
-      echo "What's in $(Build.SourcesDirectory):"
-      ls -al $(Build.SourcesDirectory)
-      echo "Copying from $(Build.SourcesDirectory) to $(Agent.TempDirectory)/nilrt/sources"
-      cp -r $(Build.SourcesDirectory) $(Agent.TempDirectory)/nilrt/sources/openembedded-core
+      rm -r sources/$REPO_NAME
+      cp -r $(Build.SourcesDirectory) $(Agent.TempDirectory)/nilrt/sources/$REPO_NAME
       cd $(Agent.TempDirectory)/nilrt/sources
       ls -al
-      cd openembedded-core
+      cd $REPO_NAME
       ls -al
-    name: Copy_over_repo
+    name: Copy_repos
 
   - script: |
       cd $(Agent.TempDirectory)/nilrt
